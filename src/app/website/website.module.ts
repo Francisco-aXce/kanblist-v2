@@ -6,6 +6,7 @@ import { LayoutComponent } from './components/layout/layout.component';
 import { NavComponent } from './components/nav/nav.component';
 import { BoardComponent } from './components/board/board.component';
 import { BoardsComponent } from './pages/boards/boards.component';
+import { TaskComponent } from './components/task/task.component';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { BoardsComponent } from './pages/boards/boards.component';
     NavComponent,
     LayoutComponent,
     BoardComponent,
-    BoardsComponent
+    BoardsComponent,
+    TaskComponent
   ],
   imports: [
     CommonModule,

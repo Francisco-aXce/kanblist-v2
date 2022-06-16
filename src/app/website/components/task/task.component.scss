@@ -1,0 +1,32 @@
+.card {
+  cursor: pointer;
+}
+
+.card:hover {
+  .delete {
+    opacity: 1;
+  }
+}
+
+.card-body {
+  max-height: 144px;
+  overflow-y: auto;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  height: 24px;
+}
+
+.delete {
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.tag {
+  width: 54px;
+  height: 14px;
+  border-radius: 14px;
+  background-color: #FC4422;
+}

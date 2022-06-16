@@ -1,0 +1,16 @@
+.card-header {
+  height: auto;
+  max-height: 174px;
+  overflow-y: auto;
+
+  cursor: grab;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+}
+
+app-task {
+  width: 100%;
+}
