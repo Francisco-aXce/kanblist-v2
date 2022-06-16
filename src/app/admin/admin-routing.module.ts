@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
 import { LayoutComponent } from './components/layout/layout.component';
-import { BoardsComponent } from './pages/boards/boards.component';
-import { ListsComponent } from './pages/lists/lists.component';
+import { HomeComponent } from './pages/home/home.component';
 
 const routes: Routes = [
   {
@@ -12,16 +10,12 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'boards',
+        redirectTo: 'home',
         pathMatch: 'full'
       },
       {
-        path: 'boards',
-        component: BoardsComponent
-      },
-      {
-        path: 'lists',
-        component: ListsComponent
+        path: 'home',
+        component: HomeComponent
       }
     ]
   }
@@ -31,4 +25,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class WebsiteRoutingModule { }
+export class AdminRoutingModule { }
