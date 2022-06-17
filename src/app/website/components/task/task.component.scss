@@ -1,26 +1,20 @@
-.card {
-  cursor: pointer;
-}
-
-.card:hover {
-  .delete {
-    opacity: 1;
-  }
-}
-
 .card-body {
   max-height: 144px;
   overflow-y: auto;
+
+  cursor: pointer;
 }
 
 .card-header {
   display: flex;
   justify-content: space-between;
-  height: 24px;
+  height: 34px;
+
+  cursor: grab;
 }
 
 .delete {
-  opacity: 0;
+  opacity: 1;
   transition: opacity 0.4s;
 }
 
@@ -29,4 +23,17 @@
   height: 14px;
   border-radius: 14px;
   background-color: #FC4422;
+}
+
+@media screen and (min-width: 575.98px)
+{
+  .delete {
+    opacity: 0;
+  }
+
+  .card:hover {
+    .delete {
+      opacity: 1;
+    }
+  }
 }

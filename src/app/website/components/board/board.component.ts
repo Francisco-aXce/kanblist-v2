@@ -75,7 +75,9 @@ export class BoardComponent implements OnInit {
   }
 
   onAddTask() {
-    // this.cardsService.activeModal = 'add-task';
+    this.cardsService.modifyingCardId = this.card.id;
+
+    this.cardsService.activeModal.next('task');
   }
 
 }

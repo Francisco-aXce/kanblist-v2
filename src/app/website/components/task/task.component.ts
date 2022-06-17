@@ -29,7 +29,14 @@ export class TaskComponent implements OnInit {
   }
 
   delete() {
-    //this.cardsService.deleteTask()
+    this.cardsService.deleteTask(this.parentId, this.task.id);
+  }
+
+  edit() {
+    this.cardsService.modifyingCardId = this.parentId;
+    this.cardsService.modifyingTaskId = this.task.id;
+
+    this.cardsService.activeModal.next("task");
   }
 
 }
