@@ -1,14 +1,25 @@
 .card-header {
   height: auto;
-  max-height: 174px;
-  overflow-y: auto;
 
-  cursor: grab;
+  textarea {
+    width: 100%;
+    min-height: 24px;
+    resize: none;
+    background: transparent;
+    border: none;
+    overflow: auto;
+    color: white;
+    max-height: 174px;
+  }
 }
 
 .card-body {
   display: flex;
   flex-direction: column;
+}
+
+.card-footer {
+  cursor: move;
 }
 
 app-task {

@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "kanblist-v2": {
+      "hosting": {
+        "kanblist-v2": [
+          "kanblist"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "kanblist-v2"
+  }
+}

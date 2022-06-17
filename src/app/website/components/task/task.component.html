@@ -7,10 +7,10 @@
   </div>
   <div class="card-body pt-0 ps-2 pe-2 pb-0">
     <div class="card-title">
-      <p class="m-0">Clean</p>
+      <p class="m-0">{{task.name}}</p>
     </div>
   </div>
   <div class="card-footer py-0" style="border: none;">
-    <i class="bi bi-body-text"></i>
+    <i class="bi bi-body-text" *ngIf="task.description !== ''"></i>
   </div>
 </div>

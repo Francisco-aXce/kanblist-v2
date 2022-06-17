@@ -1,8 +1,8 @@
 <div class="main">
-  <app-board></app-board>
-  <app-board></app-board>
-  <app-board></app-board>
-  <app-board></app-board>
-  <app-board></app-board>
-  <app-board></app-board>
+  <app-board [card]="c" *ngFor="let c of cards"></app-board>
+  <button class="btn btn-secondary d-flex align-items-center align-self-start"
+  style="width: 324px; height: 47px;" (click)="addNewBoard()">
+    <i class="bi bi-plus" style="font-size: 34px; line-height: 0;"></i>
+    <span>Add board</span>
+  </button>
 </div>
