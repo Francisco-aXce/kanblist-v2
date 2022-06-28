@@ -1,4 +1,5 @@
 <nav class="navbar navbar-expand-sm navbar-dark fixed-top bg-dark py-0">
+
   <div class="container">
     <a class="navbar-brand" href="">
       <i class="bi bi-bounding-box-circles ms-3" style="font-size: 30px;"></i>
@@ -6,24 +7,35 @@
     </a>
 
     <button type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-    aria-controls="navbarNav" aria-expanded="false" aria-label="Show view modes"
+    aria-controls="navbarNav" aria-expanded="false" aria-label="navbarNav"
     class="navbar-toggler me-4" style="width: 44px; height: 44px;">
       <i class="bi bi-list"></i>
     </button>
 
     <div class="content collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" routerLink="boards">Boards</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" routerLink="lists">Lists</a>
-        </li>
+        <div class="navbar-nav" *ngIf="(authState$ | async) as user">
+          <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active" routerLink="boards">Boards</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active" routerLink="lists">Lists</a>
+          </li>
+        </div>
       </ul>
-      <div class="login-signup d-flex">
-        <button class="btn btn-success me-4">Log In</button>
-        <button class="btn btn-outline-success">Sign Up</button>
+      <div class="user d-flex align-items-center" *ngIf="(authState$ | async) as user; else loginButton">
+        <span class="text-light me-2">{{user.displayName}}</span>
+        <img [src]="user.photoURL" alt="Userpfp" style="width: 40px; height: 40px; border-radius: 50%;">
+        <button class="btn btn-danger ms-2" (click)="onLogout()">Log out</button>
       </div>
+      <ng-template class="login d-flex" #loginButton>
+        <button class="btn btn-success me-4 d-flex align-items-center" (click)="onLogin()">
+          <span style="font-weight: bold;">Log In</span>
+          <div class="bg-white ms-2" style="width: 35px; height: 35px; border-radius: 50%;">
+            <img src="./../../../../assets/google.svg" alt="G" style="width: 100%; height: 100%;">
+          </div>
+        </button>
+      </ng-template>
     </div>
   </div>
 

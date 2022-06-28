@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { CardsService } from 'src/app/services/cards.service';
-
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',

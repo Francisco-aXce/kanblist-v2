@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { WebsiteRoutingModule } from './website-routing.module';
 import { LayoutComponent } from './components/layout/layout.component';
@@ -9,6 +10,9 @@ import { BoardComponent } from './components/board/board.component';
 import { BoardsComponent } from './pages/boards/boards.component';
 import { TaskComponent } from './components/task/task.component';
 import { TaskModalComponent } from './components/task-modal/task-modal.component';
+import { HomeComponent } from './pages/home/home.component';
+import { ProjectsComponent } from './pages/projects/projects.component';
+import { ProjectCardComponent } from './components/project-card/project-card.component';
 
 
 @NgModule({
@@ -18,13 +22,17 @@ import { TaskModalComponent } from './components/task-modal/task-modal.component
     BoardComponent,
     BoardsComponent,
     TaskComponent,
-    TaskModalComponent
+    TaskModalComponent,
+    HomeComponent,
+    ProjectsComponent,
+    ProjectCardComponent
   ],
   imports: [
     CommonModule,
     WebsiteRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DragDropModule
   ]
 })
 export class WebsiteModule { }
