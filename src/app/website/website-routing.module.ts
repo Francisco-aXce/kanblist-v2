@@ -30,7 +30,7 @@ const routes: Routes = [
         component: HomeComponent
       },
       {
-        path: 'boards',
+        path: 'boards/:id/:projectName',
         canActivate: [ContentGuard],
         component: BoardsComponent
       },

@@ -1,9 +1,10 @@
 <section class="main-page">
   <div class="projects-container">
-    <app-project-card style="height: fit-content;"></app-project-card>
-    <app-project-card style="height: fit-content;"></app-project-card>
-    <app-project-card style="height: fit-content;"></app-project-card>
-    <app-project-card style="height: fit-content;"></app-project-card>
-    <app-project-card style="height: fit-content;"></app-project-card>
+    <app-project-card [project]="p" *ngFor="let p of projects"></app-project-card>
+
+    <button class="btn btn-success" style="width: 20rem; height: 5rem;"
+    (click)="onAddProject()">
+      <span class="h5">New project</span>
+    </button>
   </div>
 </section>

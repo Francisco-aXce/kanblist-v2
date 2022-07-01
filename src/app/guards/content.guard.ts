@@ -17,15 +17,16 @@ export class ContentGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    return new Promise((resolve) => {
-      this.auth.authState.subscribe(resp => {
-        if(resp !== null){
-          return resolve(true);
-        }else {
-          this.router.navigate(['home']);
-          return resolve(false);
-        }
-      });
-    });
+    // return new Promise((resolve) => {
+    //   this.auth.authState.subscribe(resp => {
+    //     if(resp !== null){
+    //       return resolve(true);
+    //     }else {
+    //       this.router.navigate(['home']);
+    //       return resolve(false);
+    //     }
+    //   });
+    // });
+    return true;
   }
 }

@@ -35,4 +35,8 @@ export class AuthService {
   getUser() {
     return this.auth.authState;
   }
+
+  currentUser() {
+    return this.auth.currentUser;
+  }
 }

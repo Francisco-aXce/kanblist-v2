@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Card } from 'src/app/models/card.model';
-import { CardsService } from 'src/app/services/cards.service';
+import { BoardsService } from 'src/app/services/boards.service';
 
 @Component({
   selector: 'app-board',
@@ -25,7 +25,7 @@ export class BoardComponent implements OnInit {
   previousName: string = "";
 
   constructor(
-    private cardsService: CardsService
+    private boardsService: BoardsService
   ) {
 
   }
@@ -57,7 +57,7 @@ export class BoardComponent implements OnInit {
   }
 
   update(){
-    this.cardsService.updateCard(this.card.payloadId, this.card).then(() => {
+    this.boardsService.updateCard(this.card.payloadId, this.card).then(() => {
       console.log("Card updated");
     }).catch((error) => {
       console.log(error);
@@ -66,18 +66,18 @@ export class BoardComponent implements OnInit {
   }
 
   delete() {
-    this.cardsService.deleteCard(this.card.payloadId).then(() => {
+    this.boardsService.deleteCard(this.card.payloadId).then(() => {
       console.log("Card deleted");
-      this.cardsService.organizeIds();
+      this.boardsService.organizeIds();
     }).catch((error) => {
       console.log(error);
     });
   }
 
   onAddTask() {
-    this.cardsService.modifyingCardId = this.card.id;
+    this.boardsService.modifyingCardId = this.card.id;
 
-    this.cardsService.activeModal.next('task');
+    //this.cardsService.activeModal.next('task');
   }
 
 }

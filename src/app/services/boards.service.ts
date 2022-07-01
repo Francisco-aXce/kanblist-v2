@@ -1,28 +1,25 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { BehaviorSubject } from 'rxjs';
 
 import { Card, Task } from '../models/card.model';
+import { Project } from '../models/project.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CardsService {
+export class BoardsService {
 
   cards: Card[] = [];
   modifyingCardId: number = -1;
-  modifyingTaskId: number = -1;
-
-  activeModal = new BehaviorSubject<string>('');
-
-  activeModal$ = this.activeModal.asObservable();
+  modifyingTaskId: number = -1
 
   constructor(
     private firestore: AngularFirestore
   ) { }
 
-  getAllCards(){
-    return this.firestore.collection('cards').snapshotChanges();
+  getBoards(projects: Project[]){
+    return [];//projects.filter(project => project.cards.length > 0);
+    // return this.firestore.collection('cards').snapshotChanges();
   }
 
   addBoard(): Promise<any> {

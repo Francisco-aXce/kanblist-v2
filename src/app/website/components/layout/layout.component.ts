@@ -8,18 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class LayoutComponent implements OnInit {
 
   constructor(
-    // private cardsService: CardsService
   ) { }
 
   ngOnInit(): void {
   }
-
-  // hide() {
-  //   this.cardsService.activeModal = '';
-  // }
-
-  // showBackScreen() {
-  //   return this.cardsService.activeModal !== '';
-  // }
-
 }

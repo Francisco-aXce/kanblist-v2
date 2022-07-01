@@ -1,0 +1,55 @@
+<!-- Modal -->
+<div class="modal fade" #addTaskModal id="theModal" tabindex="-1"
+(hide.bs.modal)="close()">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{title}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body" style="background-color: #EFEFEF;">
+          <!-- I show a different modal depending on the type of modal I'm showing.
+          Those can be: Project, -->
+          <div [ngSwitch]="type">
+
+            <!-- New project modal -->
+            <form class="form-group" [formGroup]="form" id="mForm"
+            (ngSubmit)="confirm()" *ngSwitchCase="'project'">
+              <label for="name">Name</label>
+              <input type="text" class="form-control mb-3" id="name" formControlName="name" placeholder="Name"
+              autocomplete="off">
+
+              <label for="description">Description</label>
+              <textarea class="form-control mb-3" formControlName="description"></textarea>
+
+              <label for="Color">Color</label>
+              <div class="color-selection d-flex">
+                <input type="radio" class="btn-check" name="color" id="white" autocomplete="off" checked
+                value="bg-light" formControlName="color">
+                <label class="btn btn-outline-light text-dark" for="white">White</label>
+
+                <input type="radio" class="btn-check" name="color" id="Green" autocomplete="off"
+                value="bg-success" formControlName="color">
+                <label class="btn btn-outline-success" for="Green">Green</label>
+
+                <input type="radio" class="btn-check" name="color" id="Red" autocomplete="off"
+                value="bg-danger" formControlName="color">
+                <label class="btn btn-outline-danger" for="Red">Red</label>
+
+                <input type="radio" class="btn-check" name="color" id="Blue" autocomplete="off"
+                value="bg-info" formControlName="color">
+                <label class="btn btn-outline-info" for="Blue">Blue</label>
+              </div>
+              <!-- TODO: Select a color or an image for your project -->
+            </form>
+          </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="submit" form="mForm" class="btn btn-success">{{action}}</button>
+      </div>
+    </div>
+  </div>
+</div>

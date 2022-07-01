@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-sm navbar-dark fixed-top bg-dark py-0">
 
   <div class="container">
-    <a class="navbar-brand" href="">
+    <a class="navbar-brand" routerLink="">
       <i class="bi bi-bounding-box-circles ms-3" style="font-size: 30px;"></i>
       <span class="ms-2">KANBLIST</span>
     </a>
@@ -14,7 +14,7 @@
 
     <div class="content collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
-        <div class="navbar-nav" *ngIf="(authState$ | async) as user">
+        <div class="navbar-nav" *ngIf="(authState$ | async) && !onProjectsPage">
           <li class="nav-item">
             <a class="nav-link" routerLinkActive="active" routerLink="boards">Boards</a>
           </li>
@@ -28,8 +28,8 @@
         <img [src]="user.photoURL" alt="Userpfp" style="width: 40px; height: 40px; border-radius: 50%;">
         <button class="btn btn-danger ms-2" (click)="onLogout()">Log out</button>
       </div>
-      <ng-template class="login d-flex" #loginButton>
-        <button class="btn btn-success me-4 d-flex align-items-center" (click)="onLogin()">
+      <ng-template class="d-flex" #loginButton>
+        <button class="btn login btn-success me-4 d-flex align-items-center" (click)="onLogin()">
           <span style="font-weight: bold;">Log In</span>
           <div class="bg-white ms-2" style="width: 35px; height: 35px; border-radius: 50%;">
             <img src="./../../../../assets/google.svg" alt="G" style="width: 100%; height: 100%;">

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { CardsService } from 'src/app/services/cards.service';
+import { BoardsService } from 'src/app/services/boards.service';
 import { Task } from './../../../models/card.model';
 
 @Component({
@@ -20,7 +20,7 @@ export class TaskComponent implements OnInit {
   @Input() parentId: number = -1;
 
   constructor(
-    private cardsService: CardsService
+    private boardsService: BoardsService
   ) {
 
   }
@@ -29,14 +29,14 @@ export class TaskComponent implements OnInit {
   }
 
   delete() {
-    this.cardsService.deleteTask(this.parentId, this.task.id);
+    this.boardsService.deleteTask(this.parentId, this.task.id);
   }
 
   edit() {
-    this.cardsService.modifyingCardId = this.parentId;
-    this.cardsService.modifyingTaskId = this.task.id;
+    this.boardsService.modifyingCardId = this.parentId;
+    this.boardsService.modifyingTaskId = this.task.id;
 
-    this.cardsService.activeModal.next("task");
+    //this.cardsService.activeModal.next("task");
   }
 
 }

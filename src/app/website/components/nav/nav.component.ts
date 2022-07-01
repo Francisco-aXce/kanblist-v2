@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -9,15 +10,14 @@ import { AuthService } from 'src/app/services/auth.service';
 export class NavComponent implements OnInit {
 
   constructor(
-    private authService: AuthService
-  ) { }
+    private authService: AuthService,
+    private router: Router,
+  ) {}
 
   authState$ = this.authService.getUser();
 
   ngOnInit(): void {
-    // this.authService.getUser().subscribe(resp => {
-    //   this.authService.saveUserData(resp);
-    // })
+
   }
 
   onLogin() {
@@ -31,8 +31,14 @@ export class NavComponent implements OnInit {
   onLogout() {
     this.authService.logOut().then(() => {
       console.log("Logout");
+      this.router.navigate(['home']);
     }).catch(error => {
       console.error(`Error on logout: ${error}`);
     })
+  }
+
+  // Validate if i'm in the projects page
+  get onProjectsPage() {
+    return this.router.url === '/projects';
   }
 }
