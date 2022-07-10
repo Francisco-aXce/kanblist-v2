@@ -1,6 +1,21 @@
 .main-page{
-  column-gap: 14px;
-  padding: 4px;
+  top: 150px;
+  flex-direction: column;
+}
+
+.project-title{
+  background-color: #424242;
+  margin-top: 5rem;
+  width: 100%;
+  text-align: center;
+}
+
+.boards-container {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  width: fit-content;
+  margin: 1rem;
 }
 
 app-board {

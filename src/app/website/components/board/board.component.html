@@ -1,11 +1,12 @@
   <div class="card" style="width: 324px;">
-    <div class="card-header" style="background-color: #A4ADE9;">
+    <div class="card-header" [ngClass]="board.color">
       <textarea id="title" class="card-title m-0 h6 p-0" rows="1" spellcheck="false"
-      (input)="grow()" [(ngModel)]="card.name" (keydown.enter)="titleTxt.blur()" #titleTxt
-      (focus)="nameChanged(true)" (blur)="nameChanged(false)"> {{card.name}} </textarea>
+      (input)="grow()" [(ngModel)]="board.name" (keydown.enter)="titleTxt.blur()" #titleTxt
+      (focus)="nameChanged(true)" (blur)="nameChanged(false)" placeholder="Untitled"> {{board.name}} </textarea>
     </div>
-    <div class="card-body" style="background-color: #EBECF0;">
-      <app-task [parentId]="card.id" [task]="t" *ngFor="let t of card.tasks"></app-task>
+    <div class="card-body" style="background-color: #EBECF0;"
+      cdkDropList [cdkDropListData]="board.tasks" (cdkDropListDropped)="dropTask($event)">
+      <app-task [task]="t" *ngFor="let t of board.tasks" cdkDrag></app-task>
     </div>
     <div class="card-footer d-flex column justify-content-between">
       <button class="btn btn-outline-danger p-0" style="width: 34px; height: 34px;"

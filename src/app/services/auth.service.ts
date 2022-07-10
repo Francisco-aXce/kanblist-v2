@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { GoogleAuthProvider } from 'firebase/auth';
+import { GoogleAuthProvider, User } from '@angular/fire/auth';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  // userData: any = null;
+  //user: User | null = null;
 
   constructor(
     private auth: AngularFireAuth
@@ -21,18 +22,7 @@ export class AuthService {
     return this.auth.signOut();
   }
 
-  // saveUserData(user: any) {
-  //   if(user) {
-  //     this.userData = {
-  //       name: user.displayName,
-  //       profileImg: user.photoURL
-  //     };
-  //   }else{
-  //     this.userData = null;
-  //   }
-  // }
-
-  getUser() {
+  getUser() : Observable<any> {
     return this.auth.authState;
   }
 

@@ -14,7 +14,7 @@
 
     <div class="content collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
-        <div class="navbar-nav" *ngIf="(authState$ | async) && !onProjectsPage">
+        <div class="navbar-nav" *ngIf="!onProjectsPage">
           <li class="nav-item">
             <a class="nav-link" routerLinkActive="active" routerLink="boards">Boards</a>
           </li>
@@ -25,7 +25,7 @@
       </ul>
       <div class="user d-flex align-items-center" *ngIf="(authState$ | async) as user; else loginButton">
         <span class="text-light me-2">{{user.displayName}}</span>
-        <img [src]="user.photoURL" alt="Userpfp" style="width: 40px; height: 40px; border-radius: 50%;">
+        <img [src]="user.photoURL" referrerpolicy="no-referrer" [alt]="user.displayName" style="width: 40px; height: 40px; border-radius: 50%;">
         <button class="btn btn-danger ms-2" (click)="onLogout()">Log out</button>
       </div>
       <ng-template class="d-flex" #loginButton>

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { BoardsService } from 'src/app/services/boards.service';
-import { Task } from './../../../models/card.model';
+import { Board, Task } from '../../../models/board.model';
 
 @Component({
   selector: 'app-task',
@@ -12,12 +12,10 @@ export class TaskComponent implements OnInit {
 
   @Input() task: Task = {
     name: '',
-    id: 0,
+    order: 0,
     description: '',
     color: ''
   }
-
-  @Input() parentId: number = -1;
 
   constructor(
     private boardsService: BoardsService
@@ -29,14 +27,18 @@ export class TaskComponent implements OnInit {
   }
 
   delete() {
-    this.boardsService.deleteTask(this.parentId, this.task.id);
+    this.boardsService.deleteTask(this.task.projectId!, this.task.boardId!, this.task.id!).then(resp => {
+      console.log("Task deleted! -> ", resp);
+    }).catch(error => {
+      console.error(error);
+    });
   }
 
-  edit() {
-    this.boardsService.modifyingCardId = this.parentId;
-    this.boardsService.modifyingTaskId = this.task.id;
+  // edit() {
+  //   this.boardsService.modifyingBoardId = this.parentId;
+  //   this.boardsService.modifyingTaskId = this.task.id;
 
-    //this.cardsService.activeModal.next("task");
-  }
+  //   //this.cardsService.activeModal.next("task");
+  // }
 
 }

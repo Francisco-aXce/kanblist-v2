@@ -1,7 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
 
-html{
-  background-color: #424242;
+html {
+  background-color: #424242 ;
 }
 
 .main-page{
@@ -16,5 +18,11 @@ html{
   overflow: auto;
 }
 
-/* Importing Bootstrap SCSS file. */
-@import '~bootstrap/scss/bootstrap';
+.cdk-drop-list-dragging .cdk-drag {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0.1;
+  outline: dotted 3px black;
+}

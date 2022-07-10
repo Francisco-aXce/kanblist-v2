@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Observable } from 'rxjs';
 
 import { Project } from './../models/project.model';
 import { AuthService } from './auth.service';
@@ -20,7 +21,12 @@ export class ProjectsService {
   ) { }
 
   getProjects(uId: string) {
+    //return this.db.collection('projects', ref => ref.where('name', '!=', '')).snapshotChanges();
     return this.db.collection('projects', ref => ref.where('owner', '==', uId)).snapshotChanges();
+  }
+
+  getProjectById(id: string, uId: string): Observable<any> {
+    return this.db.collection('projects', ref => ref.where('owner', '==', uId)).doc(id).valueChanges();
   }
 
   addProject(project: any) {

@@ -1,9 +1,14 @@
+<p class="project-title h3 text-white">{{ project.name }}</p>
 <div class="main-page">
-  <app-board></app-board>
-  <!-- <app-board [card]="c" *ngFor="let c of cards"></app-board> -->
-  <button class="btn btn-secondary d-flex align-items-center align-self-start"
-  style="width: 324px; height: 47px; min-width: 324px;" (click)="addNewBoard()">
-    <i class="bi bi-plus" style="font-size: 34px; line-height: 0;"></i>
-    <span>Add board</span>
-  </button>
+  <section class="boards-container"
+  cdkDropList cdkDropListOrientation="horizontal" cdkDropListGroup (cdkDropListDropped)="drop($event)"
+  [cdkDropListData]="project.boards">
+    <app-board [board]="b" *ngFor="let b of project.boards" cdkDrag></app-board>
+    <!-- <app-board [card]="c" *ngFor="let c of cards"></app-board> -->
+    <button class="btn btn-secondary d-flex align-items-center align-self-start"
+    style="width: 324px; height: 47px; min-width: 324px;" (click)="addNewBoard()">
+      <i class="bi bi-plus" style="font-size: 34px; line-height: 0;"></i>
+      <span>Add board</span>
+    </button>
+  </section>
 </div>

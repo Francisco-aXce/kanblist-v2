@@ -5,10 +5,12 @@ import { Modal } from 'bootstrap';
 import { Subscription } from 'rxjs';
 
 import { ModalService } from '../../../services/modal.service';
-import { Task } from '../../../models/card.model';
+import { Task } from '../../../models/board.model';
 import { ProjectsService } from '../../../services/projects.service';
 import { AuthService } from '../../../services/auth.service';
 import { Project } from 'src/app/models/project.model';
+import { ModalInfo } from 'src/app/models/modalInfo.model';
+import { BoardsService } from 'src/app/services/boards.service';
 
 @Component({
   selector: 'general-modal',
@@ -16,30 +18,35 @@ import { Project } from 'src/app/models/project.model';
   styleUrls: ['./general-modal.component.scss']
 })
 export class GeneralModalComponent implements OnInit {
-
-  modalSubscription: Subscription | undefined;
-
-  theModal: Modal | undefined;
-  title: string = '';
-  action: string = "";
-  type: string = '';
-
-  modifying: boolean = false;
-
-  form!: FormGroup;
-
   constructor(
     private modalService: ModalService,
     private authService: AuthService,
     private projectsService: ProjectsService,
+    private boardsService: BoardsService,
     private formBuilder:FormBuilder
   ) {
     this.buildForm();
   }
 
+  modalSubscription: Subscription | undefined;
+
+  theModal: Modal | undefined;
+
+  //TODO: Mejorar el manejo de estos datos
+  title: string = '';
+  action: string = "";
+  type: string = '';
+  modalData: ModalInfo | null = null;
+
+  modifying: boolean = false;
+
+  form!: FormGroup;
+
+
   ngOnInit(): void {
-    this.modalSubscription = this.modalService.activeModal.subscribe(value => {
-      switch(value){
+    this.modalSubscription = this.modalService.activeModal.subscribe((data: ModalInfo) => {
+      this.modalData = data;
+      switch(data.type){
         case 'add-project':
           this.type = 'project';
           this.buildForm();
@@ -52,8 +59,14 @@ export class GeneralModalComponent implements OnInit {
           this.title = 'Edit Project';
           this.action = 'Edit';
           break;
+        case 'add-task':
+          this.type = 'task';
+          this.buildForm();
+          this.title = 'Add Task';
+          this.action = 'Add';
+          break;
       }
-      if(value) this.open();
+      if(data.type) this.open();
     });
   }
 
@@ -70,22 +83,33 @@ export class GeneralModalComponent implements OnInit {
   // Close the modal
   // Hide call means that i need to close the modal manually
   close(hideCall: boolean = false) {
-    this.modalService.activeModal.next("");
+    this.modalService.activeModal.next({type: ''});
     if(hideCall && this.theModal) this.theModal.hide();
+    this.modalData = null;
   }
 
   private buildForm(initial?: Task | Project) {
     if(initial) console.log(initial);
-
+    initial ??= {
+      name: '',
+      description: '',
+      color: 'bg-light'
+    };
     // I build the form depending of his type(project or task)
     switch(this.type){
       case 'project':
         this.form = this.formBuilder.group({
-          name: [initial?.name || '', Validators.required],
-          description: [initial?.description || ''],
-          color: [initial?.color || 'bg-light']
+          name: [initial.name, Validators.required],
+          description: [initial.description],
+          color: [initial.color]
         });
         break;
+      case 'task':
+        this.form = this.formBuilder.group({
+          name: [initial.name, Validators.required],
+          description: [initial.description],
+          color: [initial.color]
+        });
     }
   }
 
@@ -121,6 +145,16 @@ export class GeneralModalComponent implements OnInit {
             color: this.form.value.color
           }).then(() => {
             console.log("Project updated");
+          }).catch(err => {
+            console.error(err);
+          });
+          break;
+      }
+    } else if (this.type === 'task'){
+      switch (this.action) {
+        case 'Add':
+          this.boardsService.addTask(this.modalData?.projectId!, this.modalData?.boardId!, this.form.value).then(resp => {
+            console.log("Task added! -> ", resp);
           }).catch(err => {
             console.error(err);
           });

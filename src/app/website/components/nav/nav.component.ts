@@ -41,4 +41,5 @@ export class NavComponent implements OnInit {
   get onProjectsPage() {
     return this.router.url === '/projects';
   }
+
 }

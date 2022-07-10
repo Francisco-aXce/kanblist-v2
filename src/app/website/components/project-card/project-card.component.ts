@@ -33,7 +33,7 @@ export class ProjectCardComponent implements OnInit {
     // I save the id of the project that i'm editing, so i can access it on the modal to update the project
     this.projectsService.modifyingId = this.project.id!;
 
-    this.modalService.open("edit-project");
+    this.modalService.open({type: "edit-project"});
   }
 
   onDelete() {
@@ -45,7 +45,7 @@ export class ProjectCardComponent implements OnInit {
   }
 
   open() {
-    this.router.navigate(['boards', this.project.id, this.project.name]);
+    this.router.navigate(['boards', this.project.id]);
   }
 
   get name() {

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ContentGuard } from '../guards/content.guard';
 
 import { HomeGuard } from '../guards/home.guard';
+import { ProjectsHubGuard } from '../guards/projects-hub.guard';
 import { LayoutComponent } from './components/layout/layout.component';
 import { BoardsComponent } from './pages/boards/boards.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -21,7 +22,7 @@ const routes: Routes = [
       },
       {
         path: 'projects',
-        canActivate: [ContentGuard],
+        canActivate: [ProjectsHubGuard],
         component: ProjectsComponent
       },
       {
@@ -30,7 +31,7 @@ const routes: Routes = [
         component: HomeComponent
       },
       {
-        path: 'boards/:id/:projectName',
+        path: 'boards/:id',
         canActivate: [ContentGuard],
         component: BoardsComponent
       },

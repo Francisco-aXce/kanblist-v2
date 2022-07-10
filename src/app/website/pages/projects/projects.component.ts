@@ -31,6 +31,7 @@ export class ProjectsComponent implements OnInit {
       })
     )
     .subscribe((data) => {
+      console.log("Projects subscription: ", data);
       let pjts: Project[] = []
       data.forEach((project: any) => {
         pjts.push({
@@ -51,6 +52,6 @@ export class ProjectsComponent implements OnInit {
   }
 
   onAddProject() {
-    this.modalService.open("add-project");
+    this.modalService.open({type: "add-project"});
   }
 }

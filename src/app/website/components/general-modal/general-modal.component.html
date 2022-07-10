@@ -18,10 +18,10 @@
             (ngSubmit)="confirm()" *ngSwitchCase="'project'">
               <label for="name">Name</label>
               <input type="text" class="form-control mb-3" id="name" formControlName="name" placeholder="Name"
-              autocomplete="off">
+              maxlength="60" autocomplete="off">
 
               <label for="description">Description</label>
-              <textarea class="form-control mb-3" formControlName="description"></textarea>
+              <textarea class="form-control mb-3" formControlName="description" maxlength="180"></textarea>
 
               <label for="Color">Color</label>
               <div class="color-selection d-flex">
@@ -43,6 +43,36 @@
               </div>
               <!-- TODO: Select a color or an image for your project -->
             </form>
+
+            <form class="form-group" [formGroup]="form" id="mForm"
+            (ngSubmit)="confirm()" *ngSwitchCase="'task'">
+              <label for="name">Name</label>
+              <input type="text" class="form-control mb-3" id="name" formControlName="name" placeholder="Name"
+              maxlength="60" autocomplete="off">
+
+              <label for="description">Description</label>
+              <textarea class="form-control mb-3" formControlName="description" maxlength="180"></textarea>
+
+              <label for="Color">Color</label>
+              <div class="color-selection d-flex">
+                <input type="radio" class="btn-check" name="color" id="white" autocomplete="off" checked
+                value="bg-light" formControlName="color">
+                <label class="btn btn-outline-light text-dark" for="white">White</label>
+
+                <input type="radio" class="btn-check" name="color" id="Green" autocomplete="off"
+                value="bg-success" formControlName="color">
+                <label class="btn btn-outline-success" for="Green">Green</label>
+
+                <input type="radio" class="btn-check" name="color" id="Red" autocomplete="off"
+                value="bg-danger" formControlName="color">
+                <label class="btn btn-outline-danger" for="Red">Red</label>
+
+                <input type="radio" class="btn-check" name="color" id="Blue" autocomplete="off"
+                value="bg-info" formControlName="color">
+                <label class="btn btn-outline-info" for="Blue">Blue</label>
+              </div>
+            </form>
+
           </div>
       </div>
 
