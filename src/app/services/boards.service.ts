@@ -92,7 +92,7 @@ export class BoardsService {
 
     this.project.boards.find(b => b.id === boardId)!.tasks.forEach((task, index) => {
       if(task.order !== index) {
-        console.log(`Order: ${task.order} | Index: ${index}`);
+        //console.log(`Order: ${task.order} | Index: ${index}`);
         task.order = index;
         this.updateTask(this.project.id!, boardId, task);
       }
@@ -104,31 +104,10 @@ export class BoardsService {
 
     this.project.boards.forEach((board, index) => {
       if(board.order !== index) {
-        console.log(`Order: ${board.order} | Index: ${index}`);
+        //console.log(`Order: ${board.order} | Index: ${index}`);
         board.order = index;
         this.updateBoard(board);
       }
     })
   }
-
-  //Add function that organize the boards and tasks ids. The idea is to have an id that is equal to the board index
-  // organizeIds(){
-  //   let changes = false;
-  //   for (let i=0; i<this.cards.length; i++){
-  //     if(this.cards[i].id !== i){
-  //       this.cards[i].id = i;
-  //       changes = true;
-  //     }
-  //     for (let t=0; t<this.cards[i].tasks.length; t++){
-  //       if(this.cards[i].tasks[t].id !== t){
-  //         this.cards[i].tasks[t].id = t;
-  //         changes = true;
-  //       }
-  //     }
-  //     if(changes || this.cards[i].tasks.length === 0) this.updateCard(this.cards[i].payloadId, this.cards[i]).then(() => {
-  //       console.log(this.cards[i].name, "organized");
-  //     });
-  //   }
-  // }
-
 }

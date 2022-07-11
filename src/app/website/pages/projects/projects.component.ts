@@ -31,7 +31,7 @@ export class ProjectsComponent implements OnInit {
       })
     )
     .subscribe((data) => {
-      console.log("Projects subscription: ", data);
+      //console.log("Projects subscription: ", data);
       let pjts: Project[] = []
       data.forEach((project: any) => {
         pjts.push({
@@ -41,7 +41,7 @@ export class ProjectsComponent implements OnInit {
       });
       this.projectsService.projects = pjts;
       this.projects = this.projectsService.projects;
-      console.log(this.projects);
+      //console.log(this.projects);
     });
   }
 
