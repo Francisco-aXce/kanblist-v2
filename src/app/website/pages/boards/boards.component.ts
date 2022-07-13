@@ -1,7 +1,7 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription, switchMap } from 'rxjs';
+import { filter, Subscription, switchMap } from 'rxjs';
 
 import { Board, Task } from 'src/app/models/board.model';
 import { Project } from 'src/app/models/project.model';
@@ -18,6 +18,7 @@ export class BoardsComponent implements OnInit {
 
   boardsSubscription: Subscription | null = null;
   tasksSubscription: Subscription = new Subscription();
+  initialSubTask : boolean = false;
 
   project: Project = {
     id: '',
@@ -62,7 +63,6 @@ export class BoardsComponent implements OnInit {
             bds.push({
               id: board.payload.doc.id,
               projectId: this.projectId,
-              tasks: [],
               ...board.payload.doc.data()
               });
             });
@@ -71,9 +71,21 @@ export class BoardsComponent implements OnInit {
             return a.order - b.order;
           });
 
-          this.project.boards = bds;
+          if(!this.initialSubTask) {
+            this.project.boards = bds;
+            this.subscribeTasks();
+            this.initialSubTask = true;
+          }else {
+            const newBds = bds.filter(board => !(this.project.boards!.find(b => b.id === board.id)));
+            const existingBds = this.project.boards!.filter(board => bds.find(b => b.id === board.id));
+            let existingBdsNewData: Board[]= [];
+            existingBds.forEach(board => {
+              existingBdsNewData.push({...board, ...bds.find(b => b.id === board.id)});
+            });
+            this.project.boards = [...existingBdsNewData, ...newBds];
+          }
+
           this.boardsService.project = this.project;
-          this.subscribeTasks();
         },
         error: (err) => {
           console.error('Error en la subscripcion de boards: -> ', err);
@@ -83,9 +95,6 @@ export class BoardsComponent implements OnInit {
   }
 
   subscribeTasks() {
-    this.tasksSubscription.unsubscribe();
-    this.tasksSubscription = new Subscription();
-
     this.project.boards?.forEach(board => {
       this.tasksSubscription.add(
         this.boardsService.getTasks(this.projectId!, board.id!, this.uId)
@@ -109,9 +118,32 @@ export class BoardsComponent implements OnInit {
     });
   }
 
+  subNewBoard(boardId: string) {
+    this.tasksSubscription.add(
+      this.boardsService.getTasks(this.projectId!, boardId, this.uId)
+      .subscribe((tasks) => {
+        let t: Task[] = [];
+        tasks.forEach((task: any) => {
+          t.push({
+            id: task.payload.doc.id,
+            boardId: boardId,
+            projectId: this.projectId,
+            ...task.payload.doc.data()
+          });
+        });
+        //Sord tasks by order
+        t.sort((a, b) => {
+          return a.order - b.order;
+        });
+        this.boardsService.project.boards!.find(board => board.id === boardId)!.tasks = t;
+      })
+    )
+  }
+
   addNewBoard() {
-    this.boardsService.addBoard().then(() => {
-      console.log("task added");
+    this.boardsService.addBoard().then((docRef) => {
+      this.subNewBoard(docRef.id);
+      console.log("board added");
     }).catch((error) => {
       console.log(error);
     });
